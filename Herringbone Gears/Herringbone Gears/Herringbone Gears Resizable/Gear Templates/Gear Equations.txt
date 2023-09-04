@@ -1,0 +1,52 @@
+
+theta1 = atn("teeth"/"meshing teeth")
+
+pitch_dia_1 = "module" * "teeth"
+pitch_rad_1 = 0.5 * "module" * "teeth"
+
+cone_rad_1 = "pitchrad1" / sin("theta1")
+cone_rad_1 = ( 0.5 * "module" * "teeth" ) / sin( atn("teeth"/"meshing teeth") )
+**cone_rad_1 = ( 0.5 * "module" * "teeth" ) / ( "teeth"/sqr(("teeth"^2) + ("meshing teeth"^2) - (2*"teeth"*"meshing teeth"*cos("mesh angle"))))
+
+back_cone_rad_1 = "pitchrad1" / cos("theta1")
+back_cone_rad_1 = ( 0.5 * "module" * "teeth" ) / cos( atn("teeth"/"meshing teeth") )
+**="D6@Section Profile"/cos(90-atn(tan(90-"Mesh Angle")+("D5@Section Profile"/("D6@Section Profile"*cos(90-"Mesh Angle")))))
+
+
+addendum = "module"
+
+dedendum = 1.5 * "module"
+
+
+equivalent teeth 1 = "gearteeth1" / cos("theta1")
+equivalent teeth 1 = "teeth" / cos( atn("teeth"/"meshing teeth") )
+
+
+EquivalentPitchDiameter = 2*"back_cone_rad1"
+EquivalentPitchDiameter = ( "teeth" / cos( atn("teeth"/"meshing teeth") ) ) * "module"
+
+
+thick circle = ( EquivalentPitchDiameter ) - (2*1.25*"Module")
+thick circle = ( ( "teeth" / cos( atn("teeth"/"meshing teeth") ) ) * "module" ) - (2*1.25*"Module")
+
+dash circle = ( EquivalentPitchDiameter )*cos("Pressure Angle")
+dash circle = ( ( "teeth" / cos( atn("teeth"/"meshing teeth") ) ) * "module" )*cos("Pressure Angle")
+
+
+involute x(t) = +/- (dash circle)*(sin(t) - t*cos(t))/2
+involute y(t) = (dash circle)*(cos(t) + t*sin(t))/2
+t1 = 0
+t2 = 1
+
+
+intersection angle = 360/("EquivalentTeeth_1"*4)
+intersection angle = 360/(( "teeth" / cos( atn("teeth"/"meshing teeth") ) )*4)
+**equivalentTeeth = equivalentPitchDiameter/"module"
+**intersection angle = 360/(( equivalentPitchDiameter/"module" )*4)
+
+
+loft clearance radius = "back_cone_rad_1" + "addendum" + ("module" * 0.1)
+loft clearance radius = ( ( 0.5 * "module" * "teeth" ) / cos( atn("teeth"/"meshing teeth") ) ) + "module" + ("module" * 0.1)
+
+
+tooth chamfer = "Module" * 1.0
